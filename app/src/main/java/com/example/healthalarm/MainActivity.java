@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TimePicker;
@@ -25,32 +26,17 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void start_btn(View view) {
 
-        int btn_count = 0;
-        if(btn_count==5){
-            Toast.makeText(this, "Your account has been blocked for 15 minutes due to 5 unsuccessfull attempts.", Toast.LENGTH_SHORT).show();
-        }
-        Toast.makeText(this, "Start ", Toast.LENGTH_SHORT).show();
-        @SuppressLint({"NewApi", "LocalSuppress"})
+        new CountDownTimer(30000, 1000) {
 
-        Handler handler = new Handler();
-        Timer timer = new Timer();
-
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        try {
-                        } catch (Exception e) {
-                            // error, do something
-                        }
-                    }
-                });
+            public void onTick(long millisUntilFinished) {
+                Toast.makeText(MainActivity.this, "seconds remaining: " + millisUntilFinished / 1000, Toast.LENGTH_SHORT).show();
             }
-        };
 
-        timer.schedule(task, 0, 60);
-        Toast.makeText(this, "End !", Toast.LENGTH_SHORT).show();
+            public void onFinish() {
+                Toast.makeText(MainActivity.this, "done!", Toast.LENGTH_SHORT).show();
+            }
+        }.start();
+
 
 
 
