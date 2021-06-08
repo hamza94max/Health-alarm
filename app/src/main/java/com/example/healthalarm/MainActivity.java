@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     String [] Btn_texts = {"Stop ", "Start"} ;
     int count = 0 ;
+    Boolean enableStart ;
     TextView btn , remainingtext ;
 
     @Override
@@ -34,19 +35,26 @@ public class MainActivity extends AppCompatActivity {
         if (count % 2 == 0){
             btn.setText(Btn_texts[1]);
             remainingtext.setVisibility(View.INVISIBLE);
+            enableStart = false ;
+
+
 
         }else {
+
+            // TODO Start State
             btn.setText(Btn_texts[0]);
+            remainingtext.setVisibility(View.VISIBLE);
+            enableStart = true ;
+            StartTime();
 
         }
-        StartTime();
-
     }
 
     private void StartTime (){
 
-        new CountDownTimer( 10 * 1000, 1000) {
 
+
+        new CountDownTimer( 8 * 1000, 1000) {
 
             @SuppressLint("SetTextI18n")
             public void onTick(long millisUntilFinished) {
@@ -55,15 +63,18 @@ public class MainActivity extends AppCompatActivity {
                 int seconds = (int) ((millisUntilFinished / 1000) % 60);
                 @SuppressLint("DefaultLocale")
                 String str = String.format("%d:%02d", minutes, seconds);
-                remainingtext.setText( getString(R.string.Timeremaining)+ str);
+                remainingtext.setText( getString(R.string.Timeremaining)+" "+ str);
+
+
             }
 
             public void onFinish() {
-                delay(3);}
+                if (enableStart){
+                    delay(2);
+                }}
 
-        }.start();}
-
-
+        }.start();
+    }
     private void delay (int seconds){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -73,6 +84,4 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "done!", Toast.LENGTH_SHORT).show();
             }
         }, seconds*1000);
-    }
-
-}
+    }}

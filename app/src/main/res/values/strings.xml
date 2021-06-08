@@ -2,5 +2,5 @@
     <string name="app_name" translatable="false">HealthAlarm</string>
 
 
-    <string name = "Timeremaining" >Time remaining: </string>
+    <string name="Timeremaining">Time remaining: </string>
 </resources>
