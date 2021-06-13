@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     Boolean enableStart ;
     TextView btn , remainingtext ;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
         btn = findViewById(R.id.start_btn);
         remainingtext = findViewById(R.id.rmd_text);
-        btn.setBackgroundColor(Color.GREEN);
 
     }
 
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         }
         private void StopMode(){
             btn.setText(Btn_texts[1]);
-            btn.setBackgroundColor(Color.GREEN);
+            btn.setBackgroundColor(R.drawable.button_shape);
             remainingtext.setVisibility(View.INVISIBLE);
             enableStart = false ;
         }
