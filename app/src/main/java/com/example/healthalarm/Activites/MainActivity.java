@@ -3,7 +3,7 @@ package com.example.healthalarm.Activites;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
-import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -15,11 +15,13 @@ import com.example.healthalarm.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    String [] Btn_texts = {"Stop ", "Start"} ;
+    String [] BtnTexts = {"Stop ", "Start"} ;
     int count = 0 ;
-    int timerem = 8;
+    int timerem = 5 ;
     Boolean enableStart ;
     TextView btn , remainingtext ;
+    MediaPlayer StopWorking , BackToWork;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void start_btn(View view) {
-        count ++ ;
-        if (count % 2 == 0){
-        StopMode();
-        }else {
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        public void start_btn(View view) {
+            count ++ ;
+            if (count % 2 == 0){
+            StopMode();
+            }else {
             StartMode();
 
+            }
         }
-    }
 
         private void delay (int seconds){
             Handler handler = new Handler();
@@ -62,21 +64,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void StartMode(){
-            btn.setText(Btn_texts[0]);
-            btn.setBackgroundColor(Color.RED);
+            btn.setText(BtnTexts[0]);
+            btn.setBackgroundResource(R.drawable.button_shape_red);
             remainingtext.setVisibility(View.VISIBLE);
             enableStart = true ;
-            StartTime();
+            StartCountingTime();
         }
         private void StopMode(){
-            btn.setText(Btn_texts[1]);
-            btn.setBackgroundColor(R.drawable.button_shape);
+            btn.setText(BtnTexts[1]);
+            btn.setBackgroundResource(R.drawable.button_shape_green);
             remainingtext.setVisibility(View.INVISIBLE);
             enableStart = false ;
+            StopWorking.stop();
         }
-        private void StartTime (){
+        private void StartCountingTime (){
 
-        new CountDownTimer( timerem * 1000, 1000) {
+        new CountDownTimer( timerem  * 1000, 1000) {
 
             @SuppressLint("SetTextI18n")
             public void onTick(long millisUntilFinished) {
@@ -88,13 +91,26 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish() {
                 if (enableStart){
-                    delay(2); }
+                    PlaySound();
+
+                }
             }
         }.start();
     }
+        private void PlaySound (){
+            StopWorking = MediaPlayer.create(getApplicationContext(),R.raw.rest);
+            StopWorking.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    delay(18);
 
+                }
+            });
+            StopWorking.start();
+        }
 
-
-
-
+        private void Backtoworksound (){
+            BackToWork = MediaPlayer.create(getApplicationContext(),R.raw.back);
+            BackToWork.start();
+        }
 }
