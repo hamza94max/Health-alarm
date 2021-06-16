@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
             btn.setBackgroundResource(R.drawable.button_shape_green);
             remainingtext.setVisibility(View.INVISIBLE);
             enableStart = false ;
-            StopWorking.stop();
         }
         private void StartCountingTime (){
 
@@ -92,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 if (enableStart){
                     PlaySound();
+                    StopMode();
 
                 }
             }
@@ -108,9 +108,8 @@ public class MainActivity extends AppCompatActivity {
             });
             StopWorking.start();
         }
-
-        private void Backtoworksound (){
-            BackToWork = MediaPlayer.create(getApplicationContext(),R.raw.back);
-            BackToWork.start();
+        private void StopSound (){
+            StopWorking.stop();
         }
+
 }
