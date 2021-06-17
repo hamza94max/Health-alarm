@@ -4,6 +4,10 @@
     <string name = "Timeremaining" >الوقت المتبقي :   </string>
 
 
+    //TODO :Notification data
+    <string name = "Advice1"  > خذ قسطا من الراحة يا صديقي  </string>
+    <string name = "Advice2"  > اعتن بصحتك  </string>
+    <string name = "Advice3"  > لا تنس شرب الماء  </string>
 
 
 

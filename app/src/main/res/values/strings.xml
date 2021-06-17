@@ -1,6 +1,18 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">HealthAlarm</string>
 
     <string name="start" translatable="false">Start</string>
     <string name="Timeremaining">Time remaining: </string>
+
+    //TODO :Notification data
+    <string name = "Advice1"  > Take a break ,myfriend </string>
+    <string name = "Advice2"  > Take care of your health </string>
+    <string name = "Advice3"  > Don\'t forget to drink water </string>
+
+
+
+
+
+
+
 </resources>

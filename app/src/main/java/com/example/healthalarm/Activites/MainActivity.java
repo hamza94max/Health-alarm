@@ -2,11 +2,9 @@ package com.example.healthalarm.Activites;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -20,8 +18,6 @@ import com.example.healthalarm.NotificationReceiver;
 import com.example.healthalarm.R;
 
 import java.util.Calendar;
-
-import static com.example.healthalarm.App.CHANNEL_1_ID;
 
 public class MainActivity extends AppCompatActivity {
 
