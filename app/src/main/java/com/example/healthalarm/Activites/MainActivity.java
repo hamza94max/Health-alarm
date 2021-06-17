@@ -2,16 +2,26 @@ package com.example.healthalarm.Activites;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.healthalarm.NotificationReceiver;
 import com.example.healthalarm.R;
+
+import java.util.Calendar;
+
+import static com.example.healthalarm.App.CHANNEL_1_ID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     Boolean enableStart ;
     TextView btn , remainingtext ;
     MediaPlayer StopWorking , BackToWork;
+
+    private NotificationManagerCompat notificationManager;
 
 
     @Override
@@ -44,23 +56,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        private void delay (int seconds){
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // code that recount the time
-                    Toast.makeText(MainActivity.this, "done!", Toast.LENGTH_SHORT).show();
-                }
-            }, seconds*1000);
-        }
+
         private String TimetoString (long millisUntilFinished){
 
             int minutes = (int) (millisUntilFinished / (60 * 1000));
             int seconds = (int) ((millisUntilFinished / 1000) % 60);
             @SuppressLint("DefaultLocale")
             String timetostring = String.format("%d:%02d", minutes, seconds);
-            return timetostring;
+            return timetostring ;
         }
 
         private void StartMode(){
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             btn.setBackgroundResource(R.drawable.button_shape_green);
             remainingtext.setVisibility(View.INVISIBLE);
             enableStart = false ;
+            StopSound();
         }
         private void StartCountingTime (){
 
@@ -85,14 +89,11 @@ public class MainActivity extends AppCompatActivity {
                 String timeremaining = TimetoString(millisUntilFinished);
                 remainingtext.setText( getString(R.string.Timeremaining)+" "+ timeremaining);
                 if (!enableStart)  StopMode();
-
             }
-
             public void onFinish() {
                 if (enableStart){
+                   addNotification();
                     PlaySound();
-                    StopMode();
-
                 }
             }
         }.start();
@@ -102,8 +103,13 @@ public class MainActivity extends AppCompatActivity {
             StopWorking.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
-                    delay(18);
-
+                    try {
+                        Thread.sleep(5000);
+                        BacktoWorkSound();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    StartCountingTime();
                 }
             });
             StopWorking.start();
@@ -111,5 +117,28 @@ public class MainActivity extends AppCompatActivity {
         private void StopSound (){
             StopWorking.stop();
         }
+        private void BacktoWorkSound(){
+            BackToWork = MediaPlayer.create(getApplicationContext(),R.raw.back);
+            BackToWork.start();
+        }
 
+        public void addNotification (){
+
+            // TODO Notification
+            Intent intent = new Intent(this, NotificationReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            Calendar calendar = Calendar.getInstance();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            } else {
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            }
+
+
+
+    }
 }
