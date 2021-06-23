@@ -1,4 +1,4 @@
-package com.example.healthalarm;
+package com.example.healthalarm.Receiver;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.healthalarm.Activites.MainActivity;
+import com.example.healthalarm.R;
 
 import java.util.Random;
 
@@ -22,22 +23,15 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent openapp = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, openapp, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,context.getString(R.string.app_name))
                 .setSmallIcon(R.drawable.splash)
                 .setAutoCancel(true)
-                .setContentText(getrandomAvice());
-
-        Intent notificationIntent = new Intent(context, MainActivity.class);
-
-        pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(pendingIntent);
-
-
-        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        builder.setSound(uri);
-        builder.setPriority(NotificationCompat.PRIORITY_HIGH);
-        builder.setContentIntent(pendingIntent);
+                .setContentText(getrandomAvice())
+                .setSound(uri)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent);
 
         Notification notification = builder.build();
         NotificationManagerCompat.from(context).notify(0, notification);

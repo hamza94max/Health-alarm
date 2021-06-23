@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthAlarm">
 
+        <service
+            android:name=".Service.BackgroundService"
+            android:enabled="true"
+            android:exported="true"/>
+
         <activity android:name=".Activites.SplashScreen" />
         <activity android:name=".Activites.MainActivity">
             <intent-filter>
@@ -21,8 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver
-            android:name=".NotificationReceiver" />
+
+        <receiver android:name=".Receiver.NotificationReceiver" />
     </application>
 
 </manifest>
