@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:background="#A7C4BC"
+    android:layoutDirection="ltr"
     android:layout_height="match_parent"
     tools:context=".Activites.MainActivity">
 
@@ -21,14 +22,16 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <include
-            layout="@layout/card"
-            android:layout_width="wrap_content"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:layout_marginTop="45dp"
+            android:keepScreenOn="true"
+            android:padding="5dp"
+            android:layoutDirection="rtl"
             android:layout_below="@+id/rmd_text"
-            tools:ignore="IncludeLayoutParam" />
-
+            android:layout_marginTop="45dp"
+            android:overScrollMode="never"    />
 
         <Button
             android:id="@+id/start_btn"
