@@ -2,8 +2,6 @@ package com.example.healthalarm.Activites;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -16,12 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ViewpagerFuncation;
 import com.example.healthalarm.Adapters.SlideAdapter;
-import com.example.DataSets.PhotoDataSet;
+import com.example.healthalarm.DataSets.PhotoDataSet;
 import com.example.healthalarm.Models.Model;
 import com.example.healthalarm.R;
 import com.example.healthalarm.Receiver.NotificationReceiver;
-
+import com.tmall.ultraviewpager.UltraViewPager;
 import java.util.Calendar;
 import java.util.List;
 
@@ -35,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     int timerem = 5 ;
     MediaPlayer StopWorking , BackToWork ;
 
+    UltraViewPager viewPager;
     List <Model> photoslist ;
     int [] photoscounts ;
 
@@ -51,10 +51,13 @@ public class MainActivity extends AppCompatActivity {
         loadData();
 
 
-        final ViewPager viewPager = findViewById(R.id.viewpager);
-        SlideAdapter slideAdapter = new SlideAdapter(photoslist , getApplicationContext());
+        viewPager = findViewById(R.id.viewpager);
+        SlideAdapter slideAdapter = new SlideAdapter( photoslist , getApplicationContext());
         viewPager.setAdapter(slideAdapter);
-        
+        ViewpagerFuncation viewpagerFuncation = new ViewpagerFuncation();
+        viewpagerFuncation.ViewpagerFuncations(viewPager);
+
+
 
     }
 
@@ -162,6 +165,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-    }
+}

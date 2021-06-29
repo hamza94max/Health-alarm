@@ -1,4 +1,4 @@
-package com.example.DataSets;
+package com.example.healthalarm.DataSets;
 
 
 import com.example.healthalarm.Models.Model;
@@ -20,6 +20,7 @@ public class PhotoDataSet {
 
         photos.add(new Model(R.drawable.focus));
         photos.add(new Model(R.drawable.f));
+        photos.add(new Model(R.drawable.leg));
 
 
         return photos;

@@ -22,16 +22,21 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <androidx.viewpager.widget.ViewPager
+
+        <com.tmall.ultraviewpager.UltraViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="450dp"
             android:keepScreenOn="true"
-            android:padding="5dp"
-            android:layoutDirection="rtl"
-            android:layout_below="@+id/rmd_text"
             android:layout_marginTop="45dp"
-            android:overScrollMode="never"    />
+            android:padding="8dp"
+            android:layout_below="@+id/rmd_text"
+
+            android:layout_centerInParent="true"
+             />
+
+
+
 
         <Button
             android:id="@+id/start_btn"

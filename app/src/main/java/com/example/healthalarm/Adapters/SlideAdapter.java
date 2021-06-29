@@ -13,6 +13,7 @@ public class SlideAdapter extends PagerAdapter {
     public List < Model > photoslist ;
     final Context context ;
 
+
     public SlideAdapter(List<Model> photoslist, Context context) {
         this.photoslist = photoslist;
         this.context = context;
@@ -24,9 +25,9 @@ public class SlideAdapter extends PagerAdapter {
         ImageView photo = new ImageView(context);
         photo.setImageResource(photoslist.get(position).getPhoto());
         container.addView(photo,0);
+
         return photo ;
     }
-
     @Override
     public int getCount() {
         return photoslist.size(); }
@@ -35,8 +36,8 @@ public class SlideAdapter extends PagerAdapter {
     public boolean isViewFromObject(View view,  Object object) {
         return view == object;
     }
+
     @Override
     public void destroyItem( ViewGroup container, int position,  Object object) {
         container.removeView((View)object);
-    }
-}
+    }}
