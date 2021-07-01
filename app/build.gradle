@@ -35,7 +35,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    compile ('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
+    implementation ('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
     testImplementation 'junit:junit:4.+'

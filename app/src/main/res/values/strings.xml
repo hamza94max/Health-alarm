@@ -8,8 +8,7 @@
     <string name="Advice1"> Take a break ,myfriend </string>
     <string name="Advice2"> Take care of your health </string>
     <string name="Advice3"> Don\'t forget to drink water </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ok"> OK </string>
 
 
 </resources>

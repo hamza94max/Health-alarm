@@ -1,7 +1,7 @@
 package com.example.healthalarm.Models;
 
 public class Model {
-    int Photo ;
+    int Photo;
 
     public Model(int photo) {
         Photo = photo;
@@ -11,7 +11,4 @@ public class Model {
         return Photo;
     }
 
-    public void setPhoto(int photo) {
-        Photo = photo;
-    }
 }

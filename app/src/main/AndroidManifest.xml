@@ -3,6 +3,7 @@
     package="com.example.healthalarm">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".App"
@@ -12,11 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthAlarm">
+        <activity android:name=".Activites.AlarmActivity"></activity>
 
         <service
             android:name=".Service.BackgroundService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity android:name=".Activites.SplashScreen" />
         <activity android:name=".Activites.MainActivity">

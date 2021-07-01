@@ -21,6 +21,7 @@ public class PhotoDataSet {
         photos.add(new Model(R.drawable.focus));
         photos.add(new Model(R.drawable.f));
         photos.add(new Model(R.drawable.leg));
+        photos.add(new Model(R.drawable.headace));
 
 
         return photos;

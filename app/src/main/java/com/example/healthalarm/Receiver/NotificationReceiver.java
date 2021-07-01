@@ -12,8 +12,10 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.healthalarm.Activites.MainActivity;
+import com.example.healthalarm.DataSets.NotificationDataSet;
 import com.example.healthalarm.R;
 
+import java.util.Locale;
 import java.util.Random;
 
 public class NotificationReceiver extends BroadcastReceiver {
@@ -28,7 +30,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,context.getString(R.string.app_name))
                 .setSmallIcon(R.drawable.splash)
                 .setAutoCancel(true)
-                .setContentText(getrandomAvice())
+                .setContentText(NotificationDataSet.getrandomAvice())
                 .setSound(uri)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent);
@@ -38,15 +40,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     }
 
-    int [] NotificationData = {(R.string.Advice1),(R.string.Advice2), (R.string.Advice3)};
 
-    private String getrandomAvice (){
-
-        int randomNum = new Random().nextInt(NotificationData.length);
-        String randomAdvice = String.valueOf((NotificationData[randomNum]));
-
-        return randomAdvice;
-    }
 
 
 

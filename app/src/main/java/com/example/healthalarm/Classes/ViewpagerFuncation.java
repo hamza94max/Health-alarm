@@ -1,11 +1,11 @@
-package com.example;
+package com.example.healthalarm.Classes;
 
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.Gravity;
-
-
 import com.tmall.ultraviewpager.UltraViewPager;
+
+
 
 
 public class ViewpagerFuncation {

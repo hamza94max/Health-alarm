@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -13,30 +14,56 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.ViewpagerFuncation;
+import com.example.healthalarm.Classes.ViewpagerFuncation;
 import com.example.healthalarm.Adapters.SlideAdapter;
 import com.example.healthalarm.DataSets.PhotoDataSet;
 import com.example.healthalarm.Models.Model;
 import com.example.healthalarm.R;
-import com.example.healthalarm.Receiver.NotificationReceiver;
+import com.example.healthalarm.Service.BackgroundService;
 import com.tmall.ultraviewpager.UltraViewPager;
+
 import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     int count = 0 ;
+    int breaktime = 5 ;
     Button StartButton ;
     TextView RemainingTimetext ;
     String [] BtnTexts = { "Stop ", "Start" } ;
     Boolean enableStart ;
-    int timerem = 5 ;
+    int timeremaining = 5 ;
     MediaPlayer StopWorking , BackToWork ;
 
-    UltraViewPager viewPager;
+    UltraViewPager viewPager ;
     List <Model> photoslist ;
     int [] photoscounts ;
+
+
+
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
+    Calendar calendar ;
+
+    @Override
+    public boolean isDestroyed() {
+
+        // TODO When the app is closed .
+        Toast.makeText(this, "destroyed !", Toast.LENGTH_LONG).show();
+        //startService(new Intent(this , BackgroundService.class));
+        return super.isDestroyed();
+    }
+
+    @Override
+    protected void onStop() {
+        Toast.makeText(this, "Stopped !", Toast.LENGTH_SHORT).show();
+
+        super.onStop();
+    }
+
 
 
     @Override
@@ -46,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
         StartButton = findViewById(R.id.start_btn);
         RemainingTimetext = findViewById(R.id.rmd_text);
+
+        /*alarmMgr = (AlarmManager)getApplicationContext().getSystemService(getApplicationContext().ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
+        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+        calendar = Calendar.getInstance();*/
 
 
         loadData();
@@ -87,9 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         int minutes = (int) (millisUntilFinished / (60 * 1000));
         int seconds = (int) ((millisUntilFinished / 1000) % 60);
-        @SuppressLint("DefaultLocale")
-        String timetostring = String.format("%d:%02d", minutes, seconds);
-        return timetostring ;
+        return String.format("%d:%02d", minutes, seconds);
     }
 
     private void StartMode(){
@@ -106,10 +136,12 @@ public class MainActivity extends AppCompatActivity {
         RemainingTimetext.setVisibility(View.INVISIBLE);
         enableStart = false ;
 
+
     }
     public void StartCountingTime(){
+        //alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),1000 * 4 , alarmIntent);
 
-        new CountDownTimer( timerem  * 1000, 1000) {
+        new CountDownTimer( timeremaining  * 1000, 1000) {
 
             @SuppressLint("SetTextI18n")
             public void onTick(long millisUntilFinished) {
@@ -119,8 +151,8 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish() {
                 if (enableStart){
-                    //addNotification();
                     PlaySound();
+                    startService(new Intent( getApplicationContext() , BackgroundService.class));
                 }
             }
         }.start();
@@ -131,8 +163,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 try {
-                    Thread.sleep(5000);
-                    BacktoWorkSound();
+
+                        Thread.sleep(breaktime * 1000);
+                        BacktoWorkSound();
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -144,25 +178,6 @@ public class MainActivity extends AppCompatActivity {
     private void BacktoWorkSound(){
         BackToWork = MediaPlayer.create(getApplicationContext(),R.raw.back);
         BackToWork.start();
-    }
-
-    public void addNotification (){
-
-        // TODO Notification
-        Intent intent = new Intent(this, NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pendingIntent);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        } else {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        }
-
-
     }
 
 }
