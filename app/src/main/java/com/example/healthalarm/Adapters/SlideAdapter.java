@@ -5,16 +5,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.viewpager.widget.PagerAdapter;
-import com.example.healthalarm.Models.Model;
+import com.example.healthalarm.Models.ViewpagerModel;
 import java.util.List;
 
 public class SlideAdapter extends PagerAdapter {
 
-    public List < Model > photoslist ;
+    public List <ViewpagerModel> photoslist ;
     final Context context ;
 
 
-    public SlideAdapter(List<Model> photoslist, Context context) {
+    public SlideAdapter(List<ViewpagerModel> photoslist, Context context) {
         this.photoslist = photoslist;
         this.context = context;
     }

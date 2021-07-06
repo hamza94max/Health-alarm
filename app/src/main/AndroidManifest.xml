@@ -16,7 +16,7 @@
         <activity android:name=".Activites.AlarmActivity"></activity>
 
         <service
-            android:name=".Service.BackgroundService"
+            android:name=".Services.BackgroundService"
             android:enabled="true"
             android:exported="true" />
 

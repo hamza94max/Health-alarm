@@ -31,12 +31,8 @@
             android:layout_marginTop="45dp"
             android:padding="8dp"
             android:layout_below="@+id/rmd_text"
-
             android:layout_centerInParent="true"
              />
-
-
-
 
         <Button
             android:id="@+id/start_btn"

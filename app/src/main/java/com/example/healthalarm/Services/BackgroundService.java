@@ -1,4 +1,4 @@
-package com.example.healthalarm.Service;
+package com.example.healthalarm.Services;
 
 
 import android.app.AlarmManager;
@@ -27,11 +27,8 @@ public class BackgroundService extends Service {
 
         return START_STICKY;
     }
-    public void onDestroy() {
-        super.onDestroy();
 
 
-    }
     public void addNotification (Context context){
 
         // TODO Notification
