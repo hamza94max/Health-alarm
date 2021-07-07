@@ -13,7 +13,6 @@ public class SlideAdapter extends PagerAdapter {
     public List <ViewpagerModel> photoslist ;
     final Context context ;
 
-
     public SlideAdapter(List<ViewpagerModel> photoslist, Context context) {
         this.photoslist = photoslist;
         this.context = context;
@@ -28,6 +27,7 @@ public class SlideAdapter extends PagerAdapter {
 
         return photo ;
     }
+
     @Override
     public int getCount() {
         return photoslist.size(); }

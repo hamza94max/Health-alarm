@@ -25,12 +25,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     int breaktime = 5;
-    Button StartButton;
-    TextView RemainingTimetext;
+    Button startButton;
+    TextView remainingTimetext;
     String [] BtnTexts = { "Stop ","Start" };
-    Boolean enableStart , isStart;
+    Boolean enableStart , isStart = true;
     int timeremaining = 5;
-    MediaPlayer StopWorking , BackToWork;
+    MediaPlayer stopWorking , backToWork;
 
     UltraViewPager viewPager;
     List <ViewpagerModel> photoslist;
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        StartButton = findViewById(R.id.start_btn);
-        RemainingTimetext = findViewById(R.id.rmd_text);
+        startButton = findViewById(R.id.start_btn);
+        remainingTimetext = findViewById(R.id.rmd_text);
 
         loadData();
 
@@ -61,26 +61,27 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
         public void start_btn(View view) {
-        isStart = true ;
          if (isStart){
              startMode();
+             isStart = false;
                 }else {
-                    stopMode();
+                stopMode();
+                isStart = true;
                 }
         }
 
     private void startMode(){
-        StartButton.setText(BtnTexts[0]);
-        StartButton.setBackgroundResource(R.drawable.button_shape_red);
-        RemainingTimetext.setVisibility(View.VISIBLE);
+        startButton.setText(BtnTexts[0]);
+        startButton.setBackgroundResource(R.drawable.button_shape_red);
+        remainingTimetext.setVisibility(View.VISIBLE);
         enableStart = true ;
         startCountingTime();
     }
 
     private void stopMode(){
-        StartButton.setText(BtnTexts[1]);
-        StartButton.setBackgroundResource(R.drawable.button_shape_green);
-        RemainingTimetext.setVisibility(View.INVISIBLE);
+        startButton.setText(BtnTexts[1]);
+        startButton.setBackgroundResource(R.drawable.button_shape_green);
+        remainingTimetext.setVisibility(View.INVISIBLE);
         enableStart = false ;
     }
 
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             public void onTick(long millisUntilFinished) {
                 String timeremaining = timetoString(millisUntilFinished);
-                RemainingTimetext.setText(getString(R.string.Timeremaining)+" "+ timeremaining);
+                remainingTimetext.setText(getString(R.string.Timeremaining)+" "+ timeremaining);
                 if (!enableStart) {stopMode();} }
 
             public void onFinish() {
@@ -111,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void playSound (){
-        StopWorking = MediaPlayer.create(getApplicationContext(),R.raw.rest);
-        StopWorking.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        stopWorking = MediaPlayer.create(getApplicationContext(),R.raw.rest);
+        stopWorking.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 try {
@@ -124,12 +125,12 @@ public class MainActivity extends AppCompatActivity {
                 startCountingTime();
             }
         });
-        StopWorking.start();
+        stopWorking.start();
     }
 
     private void backtoWorkSound(){
-        BackToWork = MediaPlayer.create(getApplicationContext(),R.raw.back);
-        BackToWork.start();
+        backToWork = MediaPlayer.create(getApplicationContext(),R.raw.back);
+        backToWork.start();
     }
 
 }
