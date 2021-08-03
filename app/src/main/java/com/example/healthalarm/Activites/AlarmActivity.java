@@ -18,7 +18,7 @@ public class AlarmActivity extends AppCompatActivity {
 
     public void OpenApp(View view) {
 
-        Intent intent = new Intent(getApplicationContext() , MainActivity.class);
+        Intent intent = new Intent(getApplicationContext() , SplashScreen.class);
         startActivity(intent);
 
     }

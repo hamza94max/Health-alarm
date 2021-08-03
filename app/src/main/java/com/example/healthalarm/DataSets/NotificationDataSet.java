@@ -7,7 +7,8 @@ public class NotificationDataSet {
 
     static String [] NotificationData = {"Take a break ,myfriend" ,"Take care of your health" , "Don't forget to drink water"
             ,"Sit straight, don't slouch or slump, look straight ahead",
-            "give your eyes a chance to reset their focus."
+            "give your eyes a chance to reset their focus.","Remember to check your posture","sit straight, be healthy."
+            ,
 
     };
 

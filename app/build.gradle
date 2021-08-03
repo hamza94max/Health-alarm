@@ -38,6 +38,16 @@ dependencies {
     implementation ('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
+
+
+    //workmanager
+    //noinspection GradleDependency
+    implementation "androidx.work:work-runtime:2.5.0"
+
+
+
+
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

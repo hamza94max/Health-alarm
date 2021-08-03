@@ -20,6 +20,7 @@ public class SplashScreen extends AppCompatActivity {
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.splashtransition);
         img.startAnimation(animation);
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -28,7 +29,6 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
-
+        }, 1700);
     }
 }
