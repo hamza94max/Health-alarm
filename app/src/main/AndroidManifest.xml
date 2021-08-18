@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthAlarm">
 
-        <activity android:name=".Activites.AlarmActivity" />
-
-
 
         <activity android:name=".Activites.SplashScreen" >
             <intent-filter>

@@ -13,10 +13,15 @@ public class PhotoDataSet {
     List <ViewpagerModel>  photos;
     photos = new ArrayList<>();
 
-        photos.add(new ViewpagerModel(R.drawable.focus));
         photos.add(new ViewpagerModel(R.drawable.f));
+        photos.add(new ViewpagerModel(R.drawable.fresh));
+        photos.add(new ViewpagerModel(R.drawable.breathe));
+        photos.add(new ViewpagerModel(R.drawable.live));
         photos.add(new ViewpagerModel(R.drawable.leg));
+        photos.add(new ViewpagerModel(R.drawable.relax));
         photos.add(new ViewpagerModel(R.drawable.headace));
+        photos.add(new ViewpagerModel(R.drawable.taketime));
+
 
         return photos;
     }

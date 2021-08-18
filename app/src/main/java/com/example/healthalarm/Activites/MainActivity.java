@@ -1,17 +1,13 @@
 package com.example.healthalarm.Activites;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import android.annotation.SuppressLint;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.Build;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,21 +27,22 @@ public class MainActivity extends AppCompatActivity {
     Button startButton;
     TextView remainingTimetextview;
     String [] BtnTexts = { "Stop ","Start" };
-    Boolean enableStart;
-    Boolean isStart = true;
-
-    MediaPlayer stopWorking, backToWork;
+    Boolean isStart,is = true;
 
     UltraViewPager viewPager;
     List <ViewpagerModel> photoslist;
     int [] photoscounts;
 
-     OneTimeWorkRequest workrequest ;
+    int sharedstatus = 0;
+
+    OneTimeWorkRequest workrequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         startButton = findViewById(R.id.start_btn);
         remainingTimetextview = findViewById(R.id.rmd_text);
@@ -58,8 +55,14 @@ public class MainActivity extends AppCompatActivity {
         ViewpagerFuncation viewpagerFuncation = new ViewpagerFuncation();
         viewpagerFuncation.setviewpager(viewPager);
 
+        workrequest = new OneTimeWorkRequest.Builder(MyWorker.class).build();
 
-         workrequest = new OneTimeWorkRequest.Builder(MyWorker.class).build();
+    }
+
+    private void checkstatus(int status) {
+        if (status == 0){
+            startMode();
+        }else stopMode();
 
     }
 
@@ -68,15 +71,18 @@ public class MainActivity extends AppCompatActivity {
         photoscounts = new int[photoslist.size()];
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-        public void start_btn(View view) {
-         if (isStart){
-             startMode();
-             isStart = false;
-         }else {
-          stopMode();
-          isStart = true;
-    }}
+
+    public void startbtn(View view) {
+        if (is){
+            sharedstatus = 1 ;
+            startMode();
+            setWorkerOn();
+            is = false;
+        }else {
+            sharedstatus = 0 ;
+            stopMode();
+            is = true;
+        }}
 
     @SuppressLint("SetTextI18n")
     private void startMode(){
@@ -84,18 +90,21 @@ public class MainActivity extends AppCompatActivity {
         startButton.setBackgroundResource(R.drawable.button_shape_red);
         remainingTimetextview.setVisibility(View.VISIBLE);
         remainingTimetextview.setText("Working ..");
-        //enableStart = true ;
-        WorkManager.getInstance().enqueue(workrequest);
+
+
+    }
+
+    private void setWorkerOn(){
+        WorkManager.getInstance(getApplicationContext()).enqueue(workrequest);
     }
 
     private void stopMode(){
         startButton.setText(BtnTexts[1]);
         startButton.setBackgroundResource(R.drawable.button_shape_green);
         remainingTimetextview.setVisibility(View.INVISIBLE);
-        //enableStart = false ;
-        WorkManager.getInstance().cancelAllWork();
+
+        WorkManager.getInstance(getApplicationContext()).cancelAllWork();
+
     }
 
-
-
-}
+ }
