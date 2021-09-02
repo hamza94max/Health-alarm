@@ -3,11 +3,8 @@ package com.example.healthalarm.WorkManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -16,8 +13,6 @@ import androidx.work.WorkerParameters;
 
 import com.example.healthalarm.DataSets.NotificationDataSet;
 import com.example.healthalarm.R;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class MyWorker extends Worker {
 
@@ -36,7 +31,6 @@ public class MyWorker extends Worker {
         try {
             Thread.sleep(5 * 1000);
             displayNotification(NotificationDataSet.getrandomAvice());
-            //openActivity();
             Thread.sleep(5 * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -66,4 +60,9 @@ public class MyWorker extends Worker {
         notificationManager.notify(1, notification.build());
     }
 
+    @Override
+    public void onStopped() {
+
+        super.onStopped();
+    }
 }

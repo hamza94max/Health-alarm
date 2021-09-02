@@ -1,11 +1,15 @@
 package com.example.healthalarm.Models;
 
+
+
 public class ViewpagerModel {
     int Photo;
+
     public ViewpagerModel(int photo) {
-        Photo = photo;
-    }
+        Photo = photo; }
+
     public int getPhoto() {
-        return Photo;
-    }
+        return Photo; }
+
+
 }
