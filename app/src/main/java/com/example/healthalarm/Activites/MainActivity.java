@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Button startButton;
     TextView remainingTimetextview;
     String [] BtnTexts = { "Stop ","Start" };
-    Boolean sharedpreference,isWorking = true;
+    Boolean isWorkingsharedpreference,isWorking;
 
     UltraViewPager viewPager;
     List <ViewpagerModel> photoslist;
@@ -52,19 +52,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        startButton = findViewById(R.id.start_btn);
+        remainingTimetextview = findViewById(R.id.rmd_text);
+
 
         sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
 
-        sharedpreference = sharedpreferences.getBoolean("key",true);
+        isWorkingsharedpreference = sharedpreferences.getBoolean("key",true);
+        isWorking = sharedpreferences.getBoolean("isworking",false);
 
-        checkstatus(sharedpreference);
+        checkstatus(isWorkingsharedpreference);
 
 
 
         editor = sharedpreferences.edit();
 
-        startButton = findViewById(R.id.start_btn);
-        remainingTimetextview = findViewById(R.id.rmd_text);
 
         LoadData();
 
@@ -92,16 +94,18 @@ public class MainActivity extends AppCompatActivity {
     public void startbtn(View view) {
         if (isWorking){
             startMode();
+            setWorkerOn();
             isWorking = false;
-            sharedpreference = false;
-            editor.putBoolean("key", sharedpreference);
+            editor.putBoolean("key", isWorking);
+            editor.putBoolean("isworking", isWorking);
             editor.apply();
 
         }else {
             stopMode();
+            setWorkerOff();
             isWorking = true;
-            sharedpreference = true;
-            editor.putBoolean("key", sharedpreference);
+            editor.putBoolean("key", isWorking);
+            editor.putBoolean("isworking", isWorking);
             editor.apply();
         }}
 
@@ -111,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
         startButton.setBackgroundResource(R.drawable.button_shape_red);
         remainingTimetextview.setVisibility(View.VISIBLE);
         remainingTimetextview.setText("Working ..");
-        setWorkerOn();
     }
 
     private void setWorkerOn(){
@@ -123,17 +126,17 @@ public class MainActivity extends AppCompatActivity {
         startButton.setText(BtnTexts[1]);
         startButton.setBackgroundResource(R.drawable.button_shape_green);
         remainingTimetextview.setVisibility(View.INVISIBLE);
+    }
 
+    private void setWorkerOff(){
         WorkManager.getInstance(getApplicationContext()).cancelUniqueWork("workk");
-
     }
 
     private void checkstatus(Boolean status){
         if (status){
-            Toast.makeText(this, "true", Toast.LENGTH_SHORT).show();
-            //startMode();
+            stopMode();
         }else{
-            Toast.makeText(this, "false", Toast.LENGTH_SHORT).show();
+            startMode();
         }
     }
 
