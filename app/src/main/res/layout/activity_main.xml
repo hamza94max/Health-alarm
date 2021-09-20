@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <data>
+
+        </data>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#A7C4BC"
+            android:layoutDirection="ltr"
+            android:orientation="vertical"
+            tools:context=".Activites.MainActivity">
+
+
+                <TextView
+                    android:id="@+id/remainingTime_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text=" "
+                    android:textColor="@color/black"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
+
+
+                <com.tmall.ultraviewpager.UltraViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"
+                    android:layout_below="@+id/rmd_text"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="45dp"
+                    android:keepScreenOn="true"
+                    android:padding="8dp" />
+
+                <Button
+                    android:id="@+id/start_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="89dp"
+                    android:background="@drawable/button_shape_green"
+                    android:onClick="startbtn"
+                    android:text="@string/start"
+                    android:textSize="19sp"
+                    tools:ignore="UsingOnClickInXml" />
+
+        </RelativeLayout>
+</layout>
