@@ -1,12 +1,5 @@
 package com.example.healthalarm.DataSets;
 
-
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.ViewTarget;
 import com.example.healthalarm.Models.ViewpagerModel;
 import com.example.healthalarm.R;
 

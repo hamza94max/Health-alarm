@@ -1,12 +1,5 @@
 package com.example.healthalarm.Activites;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.work.Constraints;
-import androidx.work.ExistingPeriodicWorkPolicy;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,14 +8,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.healthalarm.WorkManager.MyWorker;
-import com.example.healthalarm.ViewPagerFuncations.ViewpagerFuncation;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import com.example.healthalarm.Adapters.SlideAdapter;
 import com.example.healthalarm.DataSets.PhotoDataSet;
 import com.example.healthalarm.Models.ViewpagerModel;
 import com.example.healthalarm.R;
+import com.example.healthalarm.ViewPagerFuncations.ViewpagerFuncation;
+import com.example.healthalarm.WorkManager.MyWorker;
 import com.tmall.ultraviewpager.UltraViewPager;
 
 import java.time.Duration;
@@ -55,14 +54,12 @@ public class MainActivity extends AppCompatActivity {
         startButton = findViewById(R.id.start_btn);
         remainingTimetextview = findViewById(R.id.rmd_text);
 
-
         sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
 
         isWorkingsharedpreference = sharedpreferences.getBoolean("key",true);
         isWorking = sharedpreferences.getBoolean("isworking",false);
 
         checkstatus(isWorkingsharedpreference);
-
 
 
         editor = sharedpreferences.edit();
@@ -92,22 +89,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startbtn(View view) {
-        if (isWorking){
+        if (isWorking) {
             startMode();
             setWorkerOn();
             isWorking = false;
-            editor.putBoolean("key", isWorking);
-            editor.putBoolean("isworking", isWorking);
-            editor.apply();
 
-        }else {
+        } else {
             stopMode();
             setWorkerOff();
             isWorking = true;
-            editor.putBoolean("key", isWorking);
-            editor.putBoolean("isworking", isWorking);
-            editor.apply();
-        }}
+        }
+        editor.putBoolean("key", isWorking);
+        editor.putBoolean("isworking", isWorking);
+        editor.apply();
+    }
 
     @SuppressLint("SetTextI18n")
     private void startMode(){

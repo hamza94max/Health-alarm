@@ -31,20 +31,20 @@ public class MyWorker extends Worker {
         try {
             Thread.sleep(5 * 1000);
             displayNotification(NotificationDataSet.getrandomAvice());
-            Thread.sleep(5 * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         startCountingTime();
     }
 
-
     private void displayNotification(String content) {
-        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().
+                getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
-            NotificationChannel channel = new NotificationChannel("Channel 1", "Channel 1", NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel("Channel 1", "Channel 1",
+                    NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
 
@@ -62,7 +62,6 @@ public class MyWorker extends Worker {
 
     @Override
     public void onStopped() {
-
         super.onStopped();
     }
 }
