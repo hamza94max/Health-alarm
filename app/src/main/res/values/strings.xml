@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name" translatable="false">Health Alarm</string>
     <string name="start" translatable="false">Start</string>
     <string name="Timeremaining">Time remaining: </string>
@@ -8,6 +8,7 @@
     <string name="Advice2"> Take care of your health </string>
     <string name="Advice3"> Don\'t forget to drink water </string>
     <string name="ok"> OK </string>
+    <string name="start">Start</string>
 
 
 </resources>

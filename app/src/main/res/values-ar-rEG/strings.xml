@@ -9,6 +9,7 @@
     <string name = "Advice2"  > اعتن بصحتك  </string>
     <string name = "Advice3"  > لا تنس شرب الماء  </string>
     <string name="ok"> حسنا </string>
+    <string name="start">ابدأ </string>
 
 
 </resources>

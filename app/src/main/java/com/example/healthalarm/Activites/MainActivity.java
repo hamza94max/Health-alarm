@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
@@ -22,7 +23,7 @@ import com.example.healthalarm.Models.ViewpagerModel;
 import com.example.healthalarm.R;
 import com.example.healthalarm.ViewPagerFuncations.ViewpagerFuncation;
 import com.example.healthalarm.WorkManager.MyWorker;
-import com.tmall.ultraviewpager.UltraViewPager;
+import com.example.healthalarm.databinding.ActivityMainBinding;
 
 import java.time.Duration;
 import java.util.List;
@@ -31,16 +32,17 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sharedpreferences;
-    SharedPreferences.Editor editor ;
+    SharedPreferences.Editor editor;
 
+
+    ActivityMainBinding binding;
     Button startButton;
     TextView remainingTimetextview;
-    String [] BtnTexts = { "Stop ","Start" };
-    Boolean isWorkingsharedpreference,isWorking;
+    String[] BtnTexts = {"Stop ", "Start"};
+    Boolean isWorkingsharedpreference, isWorking;
 
-    UltraViewPager viewPager;
-    List <ViewpagerModel> photoslist;
-    int [] Photoscounts;
+    List<ViewpagerModel> photoslist;
+    int[] Photoscounts;
 
     PeriodicWorkRequest workrequest;
 
@@ -51,8 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startButton = findViewById(R.id.start_btn);
-        remainingTimetextview = findViewById(R.id.rmd_text);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
 
@@ -61,17 +62,15 @@ public class MainActivity extends AppCompatActivity {
 
         checkstatus(isWorkingsharedpreference);
 
-
         editor = sharedpreferences.edit();
-
 
         LoadData();
 
-        viewPager = findViewById(R.id.viewpager);
+
         SlideAdapter slideAdapter = new SlideAdapter( photoslist, getApplicationContext());
-        viewPager.setAdapter(slideAdapter);
+        binding.viewpager.setAdapter(slideAdapter);
         ViewpagerFuncation viewpagerFuncation = new ViewpagerFuncation();
-        viewpagerFuncation.setviewpager(viewPager);
+        viewpagerFuncation.setviewpager(binding.viewpager);
 
         workrequest = new PeriodicWorkRequest.Builder(MyWorker.class,3, TimeUnit.SECONDS).
                     setInitialDelay(Duration.ofSeconds(2))
@@ -86,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         photoslist =  PhotoDataSet.getPhotos();
         Photoscounts = new int[photoslist.size()];
     }
-
 
     public void startbtn(View view) {
         if (isWorking) {
@@ -105,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void startMode(){
-        startButton.setText(BtnTexts[0]);
-        startButton.setBackgroundResource(R.drawable.button_shape_red);
-        remainingTimetextview.setVisibility(View.VISIBLE);
-        remainingTimetextview.setText("Working ..");
+    private void startMode() {
+        binding.startBtn.setText(BtnTexts[0]);
+        binding.startBtn.setBackgroundResource(R.drawable.button_shape_red);
+        binding.remainingTimeTextview.setVisibility(View.VISIBLE);
+        binding.remainingTimeTextview.setText("Working ..");
     }
 
     private void setWorkerOn(){
@@ -117,10 +115,10 @@ public class MainActivity extends AppCompatActivity {
                 enqueueUniquePeriodicWork("workk",ExistingPeriodicWorkPolicy.REPLACE,workrequest);
     }
 
-    private void stopMode(){
-        startButton.setText(BtnTexts[1]);
-        startButton.setBackgroundResource(R.drawable.button_shape_green);
-        remainingTimetextview.setVisibility(View.INVISIBLE);
+    private void stopMode() {
+        binding.startBtn.setText(BtnTexts[1]);
+        binding.startBtn.setBackgroundResource(R.drawable.button_shape_green);
+        binding.remainingTimeTextview.setVisibility(View.INVISIBLE);
     }
 
     private void setWorkerOff(){
