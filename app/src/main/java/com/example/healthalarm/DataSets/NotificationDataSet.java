@@ -19,6 +19,19 @@ public class NotificationDataSet {
 
     };
 
+    static String [] ArabicNotificationData = {
+            "خذ استراحة يا صديقي" ,
+            "اعتني بصحتك" ,
+            "لا تنسى شرب الماء",
+            "اجلس مستقيماً ، انظر للأمام بشكل مستقيم",
+            "امنح عينيك فرصة لإعادة ضبط تركيزهما.",
+            " تذكر أن تتحقق من وضعيتك ",
+            "اجلس مستقيما ، كن بصحة جيدة.",
+            "امنح عينيك فرصة لإعادة ضبط تركيزهما.",
+            "امنح عينيك فرصة لإعادة ضبط تركيزهما.",
+    };
+
+
     public static String getrandomAvice(){
 
         int randomNum = new Random().nextInt(NotificationData.length);
