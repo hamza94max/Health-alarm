@@ -13,7 +13,6 @@ public class PhotoDataSet {
     photos = new ArrayList<>();
 
 
-        photos.add(new ViewpagerModel(R.drawable.f));
         photos.add(new ViewpagerModel(R.drawable.fresh));
         photos.add(new ViewpagerModel(R.drawable.breathe));
         photos.add(new ViewpagerModel(R.drawable.live));

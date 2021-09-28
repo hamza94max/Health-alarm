@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,10 +32,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     SharedPreferences.Editor editor;
 
-
     ActivityMainBinding binding;
-    Button startButton;
-    TextView remainingTimetextview;
+
     String[] BtnTexts = {"Stop ", "Start"};
     Boolean isWorkingsharedpreference, isWorking;
 
@@ -70,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         SlideAdapter slideAdapter = new SlideAdapter( photoslist, getApplicationContext());
         binding.viewpager.setAdapter(slideAdapter);
         ViewpagerFuncation viewpagerFuncation = new ViewpagerFuncation();
-        viewpagerFuncation.setviewpager(binding.viewpager);
+        //viewpagerFuncation.setviewpager(binding.viewpager);
 
         workrequest = new PeriodicWorkRequest.Builder(MyWorker.class,3, TimeUnit.SECONDS).
                     setInitialDelay(Duration.ofSeconds(2))
@@ -79,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                     .build();
 
     }
-
 
     private void LoadData() {
         photoslist =  PhotoDataSet.getPhotos();
@@ -112,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setWorkerOn(){
         WorkManager.getInstance(getApplicationContext()).
-                enqueueUniquePeriodicWork("workk",ExistingPeriodicWorkPolicy.REPLACE,workrequest);
+                enqueueUniquePeriodicWork("workk", ExistingPeriodicWorkPolicy.REPLACE, workrequest);
     }
 
     private void stopMode() {
