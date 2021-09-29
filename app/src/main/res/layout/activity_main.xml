@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
         <data>
-
         </data>
 
         <RelativeLayout
@@ -15,38 +14,34 @@
             tools:context=".Activites.MainActivity"
             tools:ignore="UnusedAttribute">
 
+            <TextView
+                android:id="@+id/remainingTime_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text=" "
+                android:textColor="@color/black"
+                android:textSize="27sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/remainingTime_textview"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_marginTop="90dp">
+
+                <com.itsronald.widget.ViewPagerIndicator
+                    android:id="@+id/view_pager_indicator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text=" "
-                    android:textColor="@color/black"
-                    android:textSize="27sp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:gravity="center_vertical"
+                    tools:ignore="MissingClass" />
 
-
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewpager"
-                    android:layout_width="match_parent"
-                    android:layout_height="450dp"
-                    android:layout_alignWithParentIfMissing="true"
-                    android:layout_marginTop="90dp">
-
-                        <!-- Add as a direct child of your ViewPager -->
-                        <com.itsronald.widget.ViewPagerIndicator
-                            android:id="@+id/view_pager_indicator"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center_horizontal"
-                            android:gravity="center_vertical"
-                            tools:ignore="MissingClass" />
-
-                </androidx.viewpager.widget.ViewPager>
-
+            </androidx.viewpager.widget.ViewPager>
 
                 <Button
                     android:id="@+id/start_btn"

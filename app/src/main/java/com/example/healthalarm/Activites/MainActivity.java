@@ -15,12 +15,12 @@ import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
-import com.example.healthalarm.Adapters.SlideAdapter;
+import com.example.healthalarm.Adapters.PhotosListAdapter;
 import com.example.healthalarm.DataSets.PhotoDataSet;
 import com.example.healthalarm.Models.ViewpagerModel;
 import com.example.healthalarm.R;
 import com.example.healthalarm.ViewPagerFuncations.ViewpagerFuncation;
-import com.example.healthalarm.WorkManager.MyWorker;
+import com.example.healthalarm.WorkManager.Workmanager;
 import com.example.healthalarm.databinding.ActivityMainBinding;
 
 import java.time.Duration;
@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
 
-        isWorkingsharedpreference = sharedpreferences.getBoolean("key",true);
-        isWorking = sharedpreferences.getBoolean("isworking",false);
+        isWorkingsharedpreference = sharedpreferences.getBoolean("key", true);
+        isWorking = sharedpreferences.getBoolean("isworking", false);
 
         checkstatus(isWorkingsharedpreference);
 
@@ -63,16 +63,17 @@ public class MainActivity extends AppCompatActivity {
         LoadData();
 
 
-        SlideAdapter slideAdapter = new SlideAdapter( photoslist, getApplicationContext());
-        binding.viewpager.setAdapter(slideAdapter);
+        PhotosListAdapter photosListAdapter = new PhotosListAdapter(photoslist, getApplicationContext());
+        binding.viewpager.setAdapter(photosListAdapter);
         ViewpagerFuncation viewpagerFuncation = new ViewpagerFuncation();
-        //viewpagerFuncation.setviewpager(binding.viewpager);
+        viewpagerFuncation.setviewpager(binding.viewpager);
 
-        workrequest = new PeriodicWorkRequest.Builder(MyWorker.class,3, TimeUnit.SECONDS).
-                    setInitialDelay(Duration.ofSeconds(2))
-                    .setConstraints(new Constraints.Builder().setRequiresDeviceIdle(false).build())
-                    .addTag("work")
-                    .build();
+
+        workrequest = new PeriodicWorkRequest.Builder(Workmanager.class, 3, TimeUnit.SECONDS).
+                setInitialDelay(Duration.ofSeconds(2))
+                .setConstraints(new Constraints.Builder().setRequiresDeviceIdle(false).build())
+                .addTag("work")
+                .build();
 
     }
 
