@@ -34,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    String[] BtnTexts = {"Stop ", "Start"};
+
     Boolean isWorkingsharedpreference, isWorking;
 
     List<ViewpagerModel> photoslist;
     int[] Photoscounts;
 
-    PeriodicWorkRequest workrequest;
+    PeriodicWorkRequest workMangerRequest;
 
     @SuppressLint("CommitPrefEdits")
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         viewpagerFuncation.setviewpager(binding.viewpager);
 
 
-        workrequest = new PeriodicWorkRequest.Builder(Workmanager.class, 3, TimeUnit.SECONDS).
+        workMangerRequest = new PeriodicWorkRequest.Builder(Workmanager.class, 3, TimeUnit.SECONDS).
                 setInitialDelay(Duration.ofSeconds(2))
                 .setConstraints(new Constraints.Builder().setRequiresDeviceIdle(false).build())
                 .addTag("work")
@@ -100,19 +100,19 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void startMode() {
-        binding.startBtn.setText(BtnTexts[0]);
+        binding.startBtn.setText(R.string.stop);
         binding.startBtn.setBackgroundResource(R.drawable.button_shape_red);
         binding.remainingTimeTextview.setVisibility(View.VISIBLE);
-        binding.remainingTimeTextview.setText("Working ..");
+        binding.remainingTimeTextview.setText(R.string.Working);
     }
 
     private void setWorkerOn(){
         WorkManager.getInstance(getApplicationContext()).
-                enqueueUniquePeriodicWork("workk", ExistingPeriodicWorkPolicy.REPLACE, workrequest);
+                enqueueUniquePeriodicWork("workk", ExistingPeriodicWorkPolicy.REPLACE, workMangerRequest);
     }
 
     private void stopMode() {
-        binding.startBtn.setText(BtnTexts[1]);
+        binding.startBtn.setText(R.string.start);
         binding.startBtn.setBackgroundResource(R.drawable.button_shape_green);
         binding.remainingTimeTextview.setVisibility(View.INVISIBLE);
     }
