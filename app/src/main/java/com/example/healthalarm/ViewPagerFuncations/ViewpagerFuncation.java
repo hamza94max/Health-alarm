@@ -13,8 +13,8 @@ public class ViewpagerFuncation {
 
     private static final float MIN_SCALE = 0.85f;
     private static final float MIN_ALPHA = 0.5f;
-    final long DELAY_MS = 500;
-    final long PERIOD_MS = 3000;
+    final long DELAY_MS = 1000;
+    final long PERIOD_MS = 4000;
     int currentPage = 0;
     Timer timer;
 
@@ -22,15 +22,12 @@ public class ViewpagerFuncation {
 
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
-
         final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == 7) {
-                    currentPage = 0;
-                }
-                viewPager.setCurrentItem(currentPage++, true);
+        final Runnable Update = () -> {
+            if (currentPage == 7) {
+                currentPage = 0;
             }
+            viewPager.setCurrentItem(currentPage++, true);
         };
 
         timer = new Timer();
@@ -40,7 +37,6 @@ public class ViewpagerFuncation {
                 handler.post(Update);
             }
         }, DELAY_MS, PERIOD_MS);
-
     }
 
     private static class ZoomOutPageTransformer implements ViewPager.PageTransformer {
@@ -65,7 +61,6 @@ public class ViewpagerFuncation {
                 }
                 page.setScaleX(scaleFactor);
                 page.setScaleY(scaleFactor);
-
 
                 page.setAlpha(MIN_ALPHA +
                         (scaleFactor - MIN_SCALE) /
