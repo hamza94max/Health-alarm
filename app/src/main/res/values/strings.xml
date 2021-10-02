@@ -1,13 +1,15 @@
 <resources>
-    <string name="app_name" translatable="false">Health Alarm</string>
-    <string name="start" translatable="false">Start</string>
+    <string name="app_name"> Health Alarm </string>
     <string name="Timeremaining">Time remaining: </string>
+
+    <string name="Working"> Working ..</string>
+    <string name="stop"> Stop </string>
+    <string name="start"> Start </string>
 
     //TODO :Notification data
     <string name="Advice1"> Take a break ,myfriend </string>
     <string name="Advice2"> Take care of your health </string>
     <string name="Advice3"> Don\'t forget to drink water </string>
-    <string name="ok"> OK </string>
-
+    <string name="empty" />
 
 </resources>

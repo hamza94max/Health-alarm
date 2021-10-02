@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name"> المنبه الصحي </string>
 
-    <string name = "Timeremaining" >الوقت المتبقي :   </string>
-
+    <string name="Timeremaining">الوقت المتبقي :   </string>
+    <string name="Working"> يعمل .. </string>
+    <string name="stop"> توقف </string>
+    <string name="start"> ابدأ </string>
 
     //TODO :Notification data
-    <string name = "Advice1"  > خذ قسطا من الراحة يا صديقي  </string>
-    <string name = "Advice2"  > اعتن بصحتك  </string>
-    <string name = "Advice3"  > لا تنس شرب الماء  </string>
-    <string name="ok"> حسنا </string>
-    <string name="start">ابدأ </string>
-
+    <string name="Advice1"> خذ قسطا من الراحة يا صديقي  </string>
+    <string name="Advice2"> اعتن بصحتك  </string>
+    <string name="Advice3"> لا تنس شرب الماء  </string>
 
 </resources>
