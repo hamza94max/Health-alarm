@@ -11,7 +11,7 @@
             android:background="#A7C4BC"
             android:layoutDirection="ltr"
             android:orientation="vertical"
-            tools:context=".Activites.MainActivity"
+            tools:context="apps.healthalarm.Activites.MainActivity"
             tools:ignore="UnusedAttribute">
 
             <TextView

@@ -1,4 +1,4 @@
-package com.example.healthalarm.Activites;
+package edu.apps.healthalarm.Activites;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,17 +15,18 @@ import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
-import com.example.healthalarm.Adapters.PhotosListAdapter;
-import com.example.healthalarm.DataSets.PhotoDataSet;
-import com.example.healthalarm.Models.ViewpagerModel;
 import com.example.healthalarm.R;
-import com.example.healthalarm.ViewPagerFuncations.ViewpagerFuncation;
-import com.example.healthalarm.WorkManager.Workmanager;
 import com.example.healthalarm.databinding.ActivityMainBinding;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import edu.apps.healthalarm.Adapters.PhotosListAdapter;
+import edu.apps.healthalarm.DataSets.PhotoDataSet;
+import edu.apps.healthalarm.Models.ViewpagerModel;
+import edu.apps.healthalarm.ViewPagerFuncations.ViewpagerFuncation;
+import edu.apps.healthalarm.WorkManager.Workmanager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,10 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
+    Boolean isWorkingSharedpreference, isWorking;
 
-    Boolean isWorkingsharedpreference, isWorking;
-
-    List<ViewpagerModel> photoslist;
+    private List<ViewpagerModel> photoslist;
     int[] Photoscounts;
 
     PeriodicWorkRequest workMangerRequest;
@@ -53,15 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
 
-        isWorkingsharedpreference = sharedpreferences.getBoolean("key", true);
+        isWorkingSharedpreference = sharedpreferences.getBoolean("key", true);
         isWorking = sharedpreferences.getBoolean("isworking", false);
 
-        checkstatus(isWorkingsharedpreference);
+        checkstatus(isWorkingSharedpreference);
 
         editor = sharedpreferences.edit();
 
-        LoadData();
-
+        LoadPhotos();
 
         PhotosListAdapter photosListAdapter = new PhotosListAdapter(photoslist, getApplicationContext());
         binding.viewpager.setAdapter(photosListAdapter);
@@ -77,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void LoadData() {
-        photoslist =  PhotoDataSet.getPhotos();
+    private void LoadPhotos() {
+        photoslist = PhotoDataSet.getPhotos();
         Photoscounts = new int[photoslist.size()];
     }
 
@@ -128,5 +127,4 @@ public class MainActivity extends AppCompatActivity {
             startMode();
         }
     }
-
  }

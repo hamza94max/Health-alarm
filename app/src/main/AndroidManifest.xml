@@ -7,23 +7,24 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-
-        android:allowBackup="true"
         android:icon="@drawable/splash"
         android:label="@string/app_name"
         android:roundIcon="@drawable/splash"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HealthAlarm">
+        android:theme="@style/Theme.HealthAlarm"
+        tools:ignore="AllowBackup">
 
 
-        <activity android:name=".Activites.SplashScreen" >
+        <activity
+            android:name="edu.apps.healthalarm.Activites.SplashScreen"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activites.MainActivity"/>
+        <activity android:name="edu.apps.healthalarm.Activites.MainActivity" />
 
     </application>
 
