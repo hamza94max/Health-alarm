@@ -1,16 +1,18 @@
 plugins {
     id 'com.android.application'
     id  'kotlin-android'
+    id  'kotlin-kapt'
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.apps.healthalarm"
+        applicationId "com.example.healthalarm"
         minSdkVersion 16
-        targetSdkVersion 31
+        //noinspection OldTargetApi
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -20,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -28,9 +30,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     buildFeatures {
-        //noinspection DataBindingWithoutKapt
         dataBinding true
     }
 
