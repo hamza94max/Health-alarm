@@ -1,6 +1,4 @@
-@file:Suppress("PackageName")
-
-package edu.apps.healthalarm.Activites
+package com.example.healthalarm.Activites
 
 import android.annotation.SuppressLint
 import android.content.Intent

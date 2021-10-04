@@ -1,4 +1,4 @@
-package edu.apps.healthalarm.Activites;
+package com.example.healthalarm.Activites;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,18 +15,17 @@ import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
+import com.example.healthalarm.Adapters.PhotosListAdapter;
+import com.example.healthalarm.DataSets.PhotoDataSet;
+import com.example.healthalarm.Models.ViewpagerModel;
 import com.example.healthalarm.R;
+import com.example.healthalarm.ViewPagerFuncations.ViewpagerFuncation;
+import com.example.healthalarm.WorkManager.Workmanager;
 import com.example.healthalarm.databinding.ActivityMainBinding;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import edu.apps.healthalarm.Adapters.PhotosListAdapter;
-import edu.apps.healthalarm.DataSets.PhotoDataSet;
-import edu.apps.healthalarm.Models.ViewpagerModel;
-import edu.apps.healthalarm.ViewPagerFuncations.ViewpagerFuncation;
-import edu.apps.healthalarm.WorkManager.Workmanager;
 
 public class MainActivity extends AppCompatActivity {
 

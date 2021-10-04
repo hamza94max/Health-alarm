@@ -1,9 +1,7 @@
-@file:Suppress("PackageName")
+package com.example.healthalarm.DataSets
 
-package edu.apps.healthalarm.DataSets
-
+import com.example.healthalarm.Models.ViewpagerModel
 import com.example.healthalarm.R
-import edu.apps.healthalarm.Models.ViewpagerModel
 import java.util.*
 
 object PhotoDataSet {

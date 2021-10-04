@@ -1,13 +1,11 @@
-@file:Suppress("PackageName")
-
-package edu.apps.healthalarm.Adapters
+package com.example.healthalarm.Adapters
 
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
-import edu.apps.healthalarm.Models.ViewpagerModel
+import com.example.healthalarm.Models.ViewpagerModel
 
 class PhotosListAdapter(
     private var photoslist: List<ViewpagerModel>,

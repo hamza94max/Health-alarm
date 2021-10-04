@@ -1,6 +1,4 @@
-@file:Suppress("PackageName")
-
-package edu.apps.healthalarm.ViewPagerFuncations
+package com.example.healthalarm.ViewPagerFuncations
 
 import android.os.Handler
 import android.view.View
