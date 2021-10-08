@@ -10,7 +10,7 @@
     <string name="Advice1"> Take a break ,myfriend </string>
     <string name="Advice2"> Take care of your health </string>
     <string name="Advice3"> Don\'t forget to drink water </string>
-    <string name="empty" />
-    <string name="logo_for_splash">logo for splash</string>
+    <string name="empty" translatable="false" />
+    <string name="logo_for_splash" translatable="false" />
 
 </resources>
