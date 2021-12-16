@@ -15,7 +15,7 @@ object NotificationDataSet {
         "Check your posture, buddy",
         "Check yourself, mate"
     )
-    var ArabicNotificationData = arrayOf(
+    /*var ArabicNotificationData = arrayOf(
         "خذ استراحة يا صديقي",
         "اعتني بصحتك",
         "لا تنسى شرب الماء",
@@ -25,7 +25,7 @@ object NotificationDataSet {
         "اجلس مستقيما ، كن بصحة جيدة.",
         "امنح عينيك فرصة لإعادة ضبط تركيزهما.",
         "امنح عينيك فرصة لإعادة ضبط تركيزهما."
-    )
+    )*/
 
     @JvmStatic
     fun getrandomAvice(): String {
